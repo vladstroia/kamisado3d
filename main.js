@@ -102,22 +102,23 @@ const loader = new THREE.FontLoader();
 
 loader.load( 'fonts/Limelight_Regular.json', function ( font ) {
 
-	const text_geometry = new THREE.TextGeometry( 'Hello three.js!', {
+	const text_geometry = new THREE.TextGeometry( 'Acum chiar trebuie sa\nfacem si restul jocului', {
 		font: font,
-		size: 80,
-		height: 5,
+		size: 5,    //inaltimea
+		height: 1,     //grosimea
 		curveSegments: 12,
-		bevelEnabled: true,
-		bevelThickness: 10,
-		bevelSize: 8,
+		bevelEnabled: false,
+		bevelThickness: 0.2,
+		bevelSize: 0.1,
 		bevelOffset: 0,
 		bevelSegments: 5
 	} );
-} );
-  const _textmaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+  
+  const text_material = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
   const text = new THREE.Mesh( text_geometry, text_material );
   scene.add( text );
-
+text.position.z += 100
+} );
 
 
 
@@ -128,7 +129,7 @@ const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 const torus = new THREE.Mesh(geometry, material);
 torus.position.z=40;
-torus.position.x=40;
+torus.position.x=80;
 
 scene.add(torus);
 
@@ -140,11 +141,11 @@ pointLight.position.set(5, 5, 5);
 const ambientLight = new THREE.AmbientLight(0xffffff);
 scene.add(pointLight, ambientLight);
 
-// Helpers
+// // Helpers
 
-const lightHelper = new THREE.PointLightHelper(pointLight)
-const gridHelper = new THREE.GridHelper(200, 50);
-scene.add(lightHelper, gridHelper)
+// const lightHelper = new THREE.PointLightHelper(pointLight)
+// const gridHelper = new THREE.GridHelper(200, 50);
+// scene.add(lightHelper, gridHelper)
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
