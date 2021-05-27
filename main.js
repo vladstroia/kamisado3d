@@ -2,6 +2,62 @@ import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 
+
+//util function  -- should be moved to a different file -- stores the color of each rectangle in the table value
+
+var table = [];
+for(var i=0; i<8; i++) {
+    table[i] = [];
+    for(var j=0; j<8; j++) {
+        table[i][j] = undefined;
+    }
+}
+
+// coloring the table
+table[1][0] = '0xdd223e';	
+
+table[2][3] = '0xdd223e';   //red	
+table[3][6] = '0xdd223e';	
+table[0][5] = '0xdd223e';	
+
+table[0][2] = '0xdb00ff';	
+table[1][7] = '0xdb00ff';	    //purple
+table[2][4] = '0xdb00ff';	
+table[3][1] = '0xdb00ff';	
+
+table[0][6] = '0x25ff00';	
+table[1][3] = '0x25ff00';	
+table[2][0] = '0x25ff00';	   //green
+table[3][5] = '0x25ff00';	
+
+for (let i = 0; i < 4; i++) {
+	table[i][i] = '0xff6100';
+	table[i][7-i] = '0x663300'; //brown	
+	table[i][i+4] = '0xffff00';	  //yelow ?
+	table[i][3-i] = '0xe31ca3';   //pink
+}
+// first half finished
+// mirroring the second half
+for (let i = 4; i < 8; i++) {
+	for (let j = 0 ; j < 8; j++) {
+		table[i][j] =
+			table[7-i][7-j];
+}
+}
+//end of util stuff
+
+
+
+
+
+
+
+
+
+
+
+
+
 // Setup
 
 const scene = new THREE.Scene();
@@ -21,16 +77,17 @@ renderer.render(scene, camera);
 
 // Cube
 var i;
+var j;
 for(i=0 ; i <=7; i++){
   for(j=0 ; j <=7; j++){
     const cube_geometry = new THREE.BoxGeometry( 5, 2,5 );
-    const cube_material = new THREE.MeshBasicMaterial( {color: 0xff6347} );
+    const cube_material = new THREE.MeshBasicMaterial( {color: parseInt( table[i][j])} );
     const cube = new THREE.Mesh( cube_geometry, cube_material );
     cube.position.z = 7*i;
     cube.position.x = 7*j;
     scene.add( cube );
+  }
 }
-
 
 
 
