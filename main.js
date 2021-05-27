@@ -19,11 +19,30 @@ camera.position.setX(-3);
 
 renderer.render(scene, camera);
 
+// Cube
+var i;
+for(i=0 ; i <=7; i++){
+  for(j=0 ; j <=7; j++){
+    const cube_geometry = new THREE.BoxGeometry( 5, 2,5 );
+    const cube_material = new THREE.MeshBasicMaterial( {color: 0xff6347} );
+    const cube = new THREE.Mesh( cube_geometry, cube_material );
+    cube.position.z = 7*i;
+    cube.position.x = 7*j;
+    scene.add( cube );
+}
+
+
+
+
+
+
 // Torus
 
 const geometry = new THREE.TorusGeometry(10, 3, 16, 100);
 const material = new THREE.MeshStandardMaterial({ color: 0xff6347 });
 const torus = new THREE.Mesh(geometry, material);
+torus.position.z=40;
+torus.position.x=40;
 
 scene.add(torus);
 
@@ -37,9 +56,9 @@ scene.add(pointLight, ambientLight);
 
 // Helpers
 
-// const lightHelper = new THREE.PointLightHelper(pointLight)
-// const gridHelper = new THREE.GridHelper(200, 50);
-// scene.add(lightHelper, gridHelper)
+const lightHelper = new THREE.PointLightHelper(pointLight)
+const gridHelper = new THREE.GridHelper(200, 50);
+scene.add(lightHelper, gridHelper)
 
 const controls = new OrbitControls(camera, renderer.domElement);
 
@@ -63,13 +82,7 @@ Array(200).fill().forEach(addStar);
 const spaceTexture = new THREE.TextureLoader().load('space.jpg');
 scene.background = spaceTexture;
 
-// Avatar
 
-// const jeffTexture = new THREE.TextureLoader().load('jeff.png');
-
-// const jeff = new THREE.Mesh(new THREE.BoxGeometry(3, 3, 3), new THREE.MeshBasicMaterial({ map: jeffTexture }));
-
-// scene.add(jeff);
 
 // Moon
 
@@ -87,13 +100,11 @@ const moon = new THREE.Mesh(
 scene.add(moon);
 
 moon.position.z = 30;
+moon.position.y = 30;
 moon.position.setX(-10);
 
-// jeff.position.z = -5;
-// jeff.position.x = 2;
 
 // Scroll Animation
-
 function moveCamera() {
   const t = document.body.getBoundingClientRect().top;
   moon.rotation.x += 0.05;
@@ -107,12 +118,11 @@ function moveCamera() {
   camera.position.x = t * -0.0002;
   camera.rotation.y = t * -0.0002;
 }
-
 document.body.onscroll = moveCamera;
 moveCamera();
 
 // Animation Loop
-
+camera.position.z = 60;
 function animate() {
   requestAnimationFrame(animate);
 
