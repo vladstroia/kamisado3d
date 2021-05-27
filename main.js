@@ -15,15 +15,14 @@ for(var i=0; i<8; i++) {
 
 // coloring the table
 table[1][0] = '0xdd223e';	
-
 table[2][3] = '0xdd223e';   //red	
 table[3][6] = '0xdd223e';	
 table[0][5] = '0xdd223e';	
 
-table[0][2] = '0xdb00ff';	
-table[1][7] = '0xdb00ff';	    //purple
-table[2][4] = '0xdb00ff';	
-table[3][1] = '0xdb00ff';	
+table[0][2] = '0x9059a6';	
+table[1][7] = '0x9059a6';	    //purple
+table[2][4] = '0x9059a6';	
+table[3][1] = '0x9059a6';	
 
 table[0][6] = '0x25ff00';	
 table[1][3] = '0x25ff00';	
@@ -31,7 +30,7 @@ table[2][0] = '0x25ff00';	   //green
 table[3][5] = '0x25ff00';	
 
 for (let i = 0; i < 4; i++) {
-	table[i][i] = '0xff6100';
+	table[i][i] = '0xff6100';   //portocaliu
 	table[i][7-i] = '0x663300'; //brown	
 	table[i][i+4] = '0xffff00';	  //yelow ?
 	table[i][3-i] = '0xe31ca3';   //pink
@@ -44,6 +43,15 @@ for (let i = 4; i < 8; i++) {
 			table[7-i][7-j];
 }
 }
+
+for (let i = 0; i < 8; i++) {
+	for (let j = 0 ; j < 8; j++) {
+		if(table[i][j] == undefined)
+			table[i][j] = '0x1a95e5';
+}
+}
+
+
 //end of util stuff
 
 
@@ -88,6 +96,27 @@ for(i=0 ; i <=7; i++){
     scene.add( cube );
   }
 }
+
+//text
+const loader = new THREE.FontLoader();
+
+loader.load( 'fonts/Limelight_Regular.json', function ( font ) {
+
+	const text_geometry = new THREE.TextGeometry( 'Hello three.js!', {
+		font: font,
+		size: 80,
+		height: 5,
+		curveSegments: 12,
+		bevelEnabled: true,
+		bevelThickness: 10,
+		bevelSize: 8,
+		bevelOffset: 0,
+		bevelSegments: 5
+	} );
+} );
+  const _textmaterial = new THREE.MeshBasicMaterial( {color: 0x00ff00} );
+  const text = new THREE.Mesh( text_geometry, text_material );
+  scene.add( text );
 
 
 
